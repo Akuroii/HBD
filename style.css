@@ -33,8 +33,8 @@ body {
     position: relative;
     background-color: transparent;
     background-image: linear-gradient(0deg, transparent 24%, rgba(255, 255, 255, 0.85) 25%, rgba(255, 255, 255, 0.85) 26%, transparent 27%, transparent 74%, rgba(255, 255, 255, 0.85) 75%, rgba(255, 255, 255, 0.85) 76%, transparent 77%, transparent), linear-gradient(90deg, transparent 24%, rgba(255, 255, 255, 0.85) 25%, rgba(255, 255, 255, 0.85) 26%, transparent 27%, transparent 74%, rgba(255, 255, 255, 0.85) 75%, rgba(255, 255, 255, 0.85) 76%, transparent 77%, transparent);
-    height:100%;
-    background-size:80px 80px;
+    min-height: 100%;
+    background-size: 80px 80px;
     overflow: hidden;
     z-index: 1;
 }
@@ -270,10 +270,13 @@ body {
     object-fit: cover;
     object-position: 50% 18%;
 }
+/* Decorative elements use clamp() so they scale smoothly between
+   phone / tablet / desktop instead of relying only on fixed pixel
+   offsets tuned for one screen width. */
 .cricle{
     position: absolute;
-    top: 20px;
-    right: 50px;
+    top: clamp(6px, 2vw, 20px);
+    right: clamp(8px, 4vw, 50px);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -296,8 +299,8 @@ body {
 
 }
 .text__cricle{
-    width: 100px;
-    height: 100px;
+    width: clamp(70px, 8vw, 100px);
+    height: clamp(70px, 8vw, 100px);
     background-color: var(--color-text-pink);
     border-radius: 50%;
     border: 5px solid var(--color-black);
@@ -338,9 +341,14 @@ body {
 }
 .right .balloon_one{
     position: absolute;
-    top: -70px;
-    left: -70px;
+    top: clamp(-40px, -6vw, -70px);
+    left: clamp(-30px, -6vw, -70px);
+    width: clamp(55px, 9vw, 100px);
     animation: balloon1 2s infinite linear;
+}
+.right .balloon_one img{
+    width: 100%;
+    display: block;
 }
 @keyframes balloon1{
     0%, 50%,100%{
@@ -358,11 +366,16 @@ body {
 }
 .right .balloon_two{
     position: absolute;
-    top: 170px;
-    right: -65px;
+    top: clamp(90px, 14vw, 170px);
+    right: clamp(-25px, -5vw, -65px);
+    width: clamp(55px, 9vw, 100px);
     z-index: -1;
     transform: rotate(10deg);
     animation: balloon2 2s infinite linear;
+}
+.right .balloon_two img{
+    width: 100%;
+    display: block;
 }
 @keyframes balloon2 {
     0%,50%,100%{
@@ -388,34 +401,34 @@ body {
             scaleStar 2s 16s infinite ease-in-out;
 }
 .decorate_star.star1{
-    width: 20px;
-    height: 20px;
-    top: 75px;
-    left: 300px;
+    width: 16px;
+    height: 16px;
+    top: 8vh;
+    left: 22vw;
 }
 .decorate_star.star2{
-    width: 15px;
-    height: 20px;
-    top: 35px;
-    right: 360px;
+    width: 13px;
+    height: 16px;
+    top: 4vh;
+    right: 26vw;
 }
 .decorate_star.star3{
-    width: 14px;
-    height: 14px;
-    top: 290px;
-    left: 630px;
+    width: 12px;
+    height: 12px;
+    top: 32vh;
+    right: 10vw;
 }
 .decorate_star.star4{
-    width: 18px;
-    height: 18px;
-    bottom: 60px;
-    left: 35px;
+    width: 15px;
+    height: 15px;
+    bottom: 8vh;
+    left: 4vw;
 }
 .decorate_star.star5{
-    width: 16px;
-    height: 18px;
-    bottom: 140px;
-    left: 500px;
+    width: 14px;
+    height: 15px;
+    bottom: 16vh;
+    left: 36vw;
 }
 @keyframes scaleStar {
     25%{
@@ -429,34 +442,44 @@ body {
     position: absolute;
     right: 0;
     bottom: -10px;
+    width: clamp(60px, 10vw, 100px);
+}
+.decorate_bottom img{
+    width: 100%;
+    display: block;
 }
 .decorate_flower--one{
     position: absolute;
-    top: 250px;
-    left: 50px;
+    top: 30vh;
+    left: 5vw;
     transform: scale(0);
     animation: scaleCricle 3s var(--t) forwards ease-in-out;
 }
 .decorate_flower--two{
     position: absolute;
-    top: 225px;
-    left: 540px;
+    top: 27vh;
+    left: 55vw;
     transform: scale(0);
     animation: scaleCricle 3s var(--t) forwards ease-in-out;
 }
 .decorate_flower--three{
     position: absolute;
-    top: 150px;
-    right: 235px;
+    top: 18vh;
+    right: 15vw;
     transform: scale(0);
     animation: scaleCricle 3s var(--t) forwards ease-in-out;
 }
 .smiley__icon{
     position: absolute;
-    bottom: 180px;
-    left: 600px;
+    bottom: 20vh;
+    right: 8vw;
+    width: clamp(55px, 9vw, 100px);
     transform: scale(0);
     animation: scaleCricle 3s 15s forwards ease-in-out;
+}
+.smiley__icon img{
+    width: 100%;
+    display: block;
 }
 
 
@@ -472,8 +495,8 @@ body {
 }
 .box__letter .letter__border{
     position: absolute;
-    width: 55vw;
-    height: 450px;
+    width: min(55vw, 780px);
+    height: min(450px, 80vh);
     background-color: var(--color-white);
     border-radius: 27px;
     padding: 17px;
@@ -503,6 +526,7 @@ body {
     background-color: var(--color-bg-letter);
     border-radius: 10px;
     padding-top: 15px;
+    overflow-y: auto;
 }
 .letter__border .letter .title__letter{
     text-align: center;
@@ -633,16 +657,81 @@ body {
     cursor: pointer;
 }
 
+/* ============================================================
+   TABLET  (659px - 1024px)
+   Previously the desktop layout was used unchanged all the way
+   down to 659px, so the 400px circle image + fixed pixel
+   decorations overflowed on tablets. This scales things down
+   without switching to the stacked mobile layout yet.
+   ============================================================ */
+@media screen and (max-width: 1024px) and (min-width: 659px) {
+    .content{
+        padding-top: 2rem;
+    }
+    .content .left{
+        width: 42%;
+        padding-left: 30px;
+    }
+    .content .right{
+        width: 58%;
+    }
+    .title{
+        font-size: 2.2rem;
+    }
+    .content .right .image{
+        width: 260px;
+        height: 260px;
+    }
+    .date__of__birth{
+        width: 240px;
+    }
+    @keyframes dateOfBirth{
+        20%,40%{
+            width: 0px;
+            height: 0;
+            transform: translateY(0px);
+            opacity: 1;
+            visibility: visible;
+        }
+        45%{
+            transform: translateY(0px);
+            opacity: 1;
+            visibility: visible;
+            width: 240px;
+            height: 0px;
+        }
+        50%,100%{
+            transform: translateY(0px);
+            opacity: 1;
+            visibility: visible;
+            width: 240px;
+            height: 50px;
+        }
+    }
+    .flag__birthday img{
+        width: 220px;
+    }
+    .box__letter .letter__border{
+        width: min(75vw, 700px);
+    }
+}
 
-
+/* ============================================================
+   PHONE / SMALL TABLET  (<= 658px)
+   ============================================================ */
 @media screen and (max-width: 658px)   {
 
     .flag__birthday .flag__left {
-        transform: rotate(-10deg) translate(-119px,3px);
+        transform: rotate(-10deg) translate(-45px,3px);
     }
 
     .flag__birthday .flag__right {
-        transform: rotate(10deg) translate(-106px,39px) scaleX(-1);
+        transform: rotate(10deg) translate(45px,3px) scaleX(-1);
+    }
+
+    .flag__birthday img{
+        width: 45vw;
+        max-width: 220px;
     }
 
     .content {
@@ -656,14 +745,28 @@ body {
         padding-top: 2rem;
     }
 
+    /* These two were never reset for mobile before, so the desktop
+       40%/60% split + 100px left padding was squeezing everything
+       into a sliver of the screen on phones. That was the main
+       cause of the "not organized" layout students reported. */
+    .content .left{
+        width: 100%;
+        padding-left: 0;
+        align-items: center;
+        text-align: center;
+    }
+    .content .right{
+        width: 100%;
+    }
+
     .title {
         position: relative;
         width: 100%;
         display: flex;
         justify-content: center;
         font-family: "Titan One", sans-serif;
-        font-size: 1.5rem;
-        letter-spacing: 8px;
+        font-size: 1.7rem;
+        letter-spacing: 4px;
         flex-direction: column;
         perspective: 1000px;
     }
@@ -684,92 +787,104 @@ body {
         justify-content: center;
         cursor: pointer;
         z-index: 2;
-        /* transform: scale(1); */
         transition: all .5s ease-in-out;
     }
 
     .cricle {
-        position: absolute;
         top: 10px;
-        right: -54px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        transform: scale(0);
-        animation: scaleCricle 3s 15s forwards ease-in-out;
+        right: 6vw;
     }
 
     .title .hat {
         position: absolute;
-        right: -98px;
-        top: -51px !important;
+        right: -10px;
+        top: -46px;
         transform: rotate(-40deg);
         z-index: -1;
         animation: topHat 4s 7s forwards ease;
     }
-
-    .box__letter .letter__border {
-        position: absolute;
-        width: 90vw;
-        height: 315px;
-        background-color: var(--color-white);
-        border-radius: 27px;
-        padding: 17px;
-        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%,-50%);
-        display: none;
+    .title .hat img{
+        width: 90px;
     }
 
-    .letter__border .letter {
-        width: 100%;
-        height: 100%;
-        background-color: var(--color-bg-letter);
-        border-radius: 10px;
-        padding-top: 15px;
+    .date__of__birth{
+        width: 0px;
+    }
+    @keyframes dateOfBirth{
+        20%,40%{
+            width: 0px;
+            height: 0;
+            transform: translateY(0px);
+            opacity: 1;
+            visibility: visible;
+        }
+        45%{
+            transform: translateY(0px);
+            opacity: 1;
+            visibility: visible;
+            width: 260px;
+            height: 0px;
+        }
+        50%,100%{
+            transform: translateY(0px);
+            opacity: 1;
+            visibility: visible;
+            width: 260px;
+            height: 50px;
+        }
+    }
+
+    .box__letter .letter__border {
+        width: 90vw;
+        height: min(70vh, 480px);
+        padding: 14px;
     }
 
     .letter__border .letter .title__letter {
-        text-align: center;
-        font-family: 'Dancing Script', cursive;
-        font-weight: bold;
         font-size: 1.4rem;
     }
 
     .letter__border .letter .content__letter {
-        position: relative;
-        width: 100%;
-        height: 100%;
-        display: flex;
+        flex-direction: column;
         padding-top: .7rem;
-        padding-bottom: 70px;
+        padding-bottom: 40px;
+        overflow-y: auto;
+    }
+
+    .letter__border .letter .content__letter .left,
+    .letter__border .letter .content__letter .right{
+        width: 100%;
+    }
+    .letter__border .letter .content__letter .left{
+        border-right: none;
+        border-bottom: 3px solid var(--color-border);
+        padding: 1rem;
     }
 
     .content__letter .right .text__letter {
-        margin-top: -14px;
-        padding: 20px 15px 10px 15px;
+        margin-top: 10px;
+        padding: 10px 15px;
         font-family: 'Dancing Script', cursive;
-        font-size: .8rem;
+        font-size: .95rem;
     }
 
     .content__letter .right .love__img {
         opacity: 0;
         position: absolute;
-        right: 126px;
-        top: 167px;
+        right: 10px;
+        top: -20px;
     }
 
     .love__img img {
- 
-            width: 84px;
-
+        width: 70px;
     }
 
     .content .right .image {
         position: relative;
-        width: 200px;
-        height: 200px;
+        width: 55vw;
+        max-width: 220px;
+        height: 55vw;
+        max-height: 220px;
         border-radius: 50%;
         overflow: hidden;
         display: flex;
@@ -779,9 +894,10 @@ body {
 
     .name {
         position: absolute;
-        padding: 0px 3px;
+        padding: 0px 14px;
         bottom: -6px;
         border: 3px solid var(--color-black);
+        white-space: nowrap;
     }
 
     .name span {
@@ -789,69 +905,36 @@ body {
     }
 
     .right .balloon_one {
-        position: absolute;
-        top: 10px;
-        left: -77px;
-        animation: balloon1 2s infinite linear;
+        top: -8vw;
+        left: -14vw;
+        width: 20vw;
+        max-width: 76px;
     }
 
-    .right .balloon_one img{
-        width: 76px !important;
+    .right .balloon_two{
+        top: 26vw;
+        right: -13vw;
+        width: 20vw;
+        max-width: 76px;
     }
-    body {
-  margin: 0;
-  padding: 0;
-  font-family: 'Arial', sans-serif;
-  background: #e8f3fb;
-  text-align: center;
-}
 
-.container {
-  margin-top: 100px;
-}
+    .decorate_star.star1{ top: 4vh; left: 12vw; }
+    .decorate_star.star2{ top: 3vh; right: 14vw; }
+    .decorate_star.star3{ top: 28vh; right: 6vw; }
+    .decorate_star.star4{ bottom: 6vh; left: 4vw; }
+    .decorate_star.star5{ bottom: 34vh; left: 8vw; }
 
-h1 {
-  color: #3d8fd4;
-  font-size: 48px;
-  margin-bottom: 40px;
-}
+    .decorate_flower--one{ top: 34vh; left: 4vw; }
+    .decorate_flower--two{ top: 30vh; left: auto; right: 6vw; }
+    .decorate_flower--three{ top: 16vh; right: 4vw; }
 
-.button-group button {
-   position: relative;
-    right: 0px;
-    top: -200px;
-    background-color: var(--color-text-pink);
-    outline: none;
-    padding: 5px 20px;
-    font-size: 10px;
-    border-radius: 50px;
-    border: 3px solid var(--color-black);
-    font-family: "Sriracha", cursive;
-    display: flat;
-    align-items:center;
-    justify-content: center;
-    cursor: pointer;
-    z-index: 22;
-    transform: scale(1);
-    transition: all .5s ease-in-out;
-}
+    .decorate_bottom{
+        width: 60px;
+    }
 
-.button-group button:hover {
-  background-color: #3d8fd4;
-  transform: scale(1.05);
-}
-
-@keyframes pulse {
-  0% { box-shadow: 0 0 0 0 rgba(91, 168, 232, 0.7); }
-  70% { box-shadow: 0 0 0 10px rgba(91, 168, 232, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(91, 168, 232, 0); }
-}
-
-    
-
-} 0 0 rgba(91, 168, 232, 0); }
-}
-
-    
-
+    .smiley__icon{
+        bottom: 24vh;
+        right: 4vw;
+        width: 55px;
+    }
 }
