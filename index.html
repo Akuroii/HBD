@@ -13,12 +13,13 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 
-  <!-- ❤️ Floating Heart Cursor Script (restored and working) -->
+  <!-- ❤️ Floating Cursor: heart + emoji1 + emoji2 -->
   <script type="text/javascript">
-  var colours = ['#5ba8e8', '#7eb8e8', '#3d8fd4', '#b8d4ee', '#4db8ff', '#9ec4e8']; 
-  var minisize = 16; 
-  var maxisize = 28; 
-  var hearts = 66; 
+  var colours = ['#5ba8e8', '#7eb8e8', '#3d8fd4', '#b8d4ee', '#4db8ff', '#9ec4e8'];
+  var EMOJI = ['./images/emoji1.png', './images/emoji2.png'];
+  var minisize = 16;
+  var maxisize = 28;
+  var hearts = 66;
   var over_or_under = "over"; 
 
   var x = ox = 400;
@@ -30,6 +31,7 @@
   var herzx = [];
   var herzy = [];
   var herzs = [];
+  var herzImg = [];
   var kiss = false;
 
   if (typeof('addRVLoadEvent') != 'function') function addRVLoadEvent(funky) {
@@ -68,11 +70,10 @@
       ox = x;
       oy = y;
       for (c = 0; c < hearts; c++) if (herzy[c] === false) {
-        herz[c].firstChild.nodeValue = String.fromCharCode(9829);
+        if (herzImg[c]) { herzImg[c].style.width = minisize + "px"; }
+        else { herz[c].firstChild.style.fontSize = minisize + "px"; }
         herz[c].style.left = (herzx[c] = x - minisize / 2) + "px";
         herz[c].style.top = (herzy[c] = y - minisize) + "px";
-        herz[c].style.fontSize = minisize + "px";
-        herz[c].style.fontWeight = 'normal';
         herz[c].style.visibility = 'visible';
         herzs[c] = minisize;
         break;
@@ -100,17 +101,25 @@
     }
     else if (herzs[i] > minisize + 2 && Math.random() < .5 / hearts) break_my_heart(i);
     else {
-      if (Math.random() < maxisize / herzy[i] && herzs[i] < maxisize) herz[i].style.fontSize = (++herzs[i]) + "px";
+      if (Math.random() < maxisize / herzy[i] && herzs[i] < maxisize) {
+        herzs[i]++;
+        if (herzImg[i]) { herzImg[i].style.width = herzs[i] + "px"; }
+        else { herz[i].firstChild.style.fontSize = herzs[i] + "px"; }
+      }
       herz[i].style.top = herzy[i] + "px";
       herz[i].style.left = herzx[i] + "px";
     }
   }
 
   function break_my_heart(i) {
-    herz[i].firstChild.nodeValue = String.fromCharCode(9676);
-    herz[i].style.fontWeight = 'bold';
+    herz[i].style.opacity = 0;
+    herz[i].style.transition = "opacity .4s ease";
     herzy[i] = false;
-    setTimeout(() => herz[i].style.visibility = "hidden", 400);
+    setTimeout(function () {
+      herz[i].style.visibility = "hidden";
+      herz[i].style.opacity = 0.75;
+      herz[i].style.transition = "none";
+    }, 400);
   }
 
   document.onmousemove = mouse;
@@ -649,6 +658,12 @@
       msg: ""
     },
     {
+      name: "Turtle No.6",
+      thumb: "Turtles/turtle6.png",
+      media: ["Turtles/turtle6.png", "Turtles/turtle6-drawing.png", "Turtles/turtle6-drawing2.png.png"],
+      msg: "كل عام و انت بخير شي-تشان\n\nكل يوم يمر في حياة الإنسان يقترب خطوة من تحقيق حلمه\n\nانت اليوم اقتربتي سنة من الموت\n\nأتمنى لك تحققي أحلامك المتبقية في الاجل القريب\n\nإن كانت من تطور، زيادة في الطول، نجاح، موت. أتمنى لك سنة سعيدة"
+    },
+    {
       name: "Turtle No.4",
       thumb: "Turtles/turtle4.png",
       media: ["Turtles/turtle4.png", "Turtles/turtle4-drawing.png"],
@@ -656,15 +671,10 @@
     },
     {
       name: "Turtle No.5",
+      nudge: true,
       thumb: "Turtles/turtle5.png",
       media: ["Turtles/turtle5.png"],
       msg: "هاي، أنا هي أنتِ... بس من الماضي. حضرت كل ده، فعلى الأغلب أنتِ متفاجئة... لكن أنا لا (:\n\nكنت أعرف إن اليوم ده هييجي، بس ما كنت أعرف إنكِ هتكوني بهذا الشكل."
-    },
-    {
-      name: "Turtle No.6",
-      thumb: "Turtles/turtle6.png",
-      media: ["Turtles/turtle6.png", "Turtles/turtle6-drawing.png", "Turtles/turtle6-drawing2.png.png"],
-      msg: "كل عام و انت بخير شي-تشان\n\nكل يوم يمر في حياة الإنسان يقترب خطوة من تحقيق حلمه\n\nانت اليوم اقتربتي سنة من الموت\n\nأتمنى لك تحققي أحلامك المتبقية في الاجل القريب\n\nإن كانت من تطور، زيادة في الطول، نجاح، موت. أتمنى لك سنة سعيدة"
     }
   ];
 
@@ -683,10 +693,31 @@
   function buildCard(item) {
     var btn = document.createElement("button");
     btn.type = "button";
+
+    if (item.teacher) {
+      btn.className = "teacher-card";
+      var timg = document.createElement("img");
+      timg.className = "teacher-img";
+      timg.src = CDN + item.thumb;
+      timg.alt = item.name;
+      timg.loading = "lazy";
+      var tname = document.createElement("span");
+      tname.className = "bear-name";
+      tname.textContent = item.name;
+      var thint = document.createElement("span");
+      thint.className = "bear-hint";
+      thint.textContent = (item.tag ? item.tag + " · " : "") + "اضغطي عليّ 🐢";
+      btn.appendChild(timg);
+      btn.appendChild(tname);
+      btn.appendChild(thint);
+      btn.addEventListener("click", function () { openModal(item); });
+      return btn;
+    }
+
     btn.className = "turtle-card";
 
     var thumb = document.createElement("span");
-    thumb.className = "turtle-thumb";
+    thumb.className = "turtle-thumb" + (item.nudge ? " nudge-right" : "");
     var img = document.createElement("img");
     img.src = CDN + item.thumb;
     img.alt = item.name;
