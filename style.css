@@ -184,7 +184,7 @@ body {
         transform: rotate(0deg);
     }
 }
-.date__of__birth, .name{
+.date__of__birth{
     display: flex;
     justify-content:space-around;
     align-items: center;
@@ -227,21 +227,12 @@ body {
         height: 50px;
     }
 }
-.name{
-    position: absolute;
-    padding: 0px 40px;
-    bottom: -20px;
-    border: 3px solid var(--color-black);
-}
-.date__of__birth span, .name span{
+.date__of__birth span{
     font-weight: bold;
     margin: 0px 40px;
 }
 .date__of__birth span{
     font-size: 1.2rem;
-}
-.name span{
-    font-size: 1.7rem;
 }
 .right .box__account{
     position: relative;
@@ -391,31 +382,31 @@ body {
     width: 20px;
     height: 20px;
     top: 75px;
-    left: 300px;
+    left: clamp(140px, 22vw, 300px);
 }
 .decorate_star.star2{
     width: 15px;
     height: 20px;
     top: 35px;
-    right: 360px;
+    right: clamp(100px, 26vw, 360px);
 }
 .decorate_star.star3{
     width: 14px;
     height: 14px;
     top: 290px;
-    left: 630px;
+    left: clamp(200px, 46vw, 630px);
 }
 .decorate_star.star4{
     width: 18px;
     height: 18px;
     bottom: 60px;
-    left: 35px;
+    left: clamp(12px, 2.5vw, 35px);
 }
 .decorate_star.star5{
     width: 16px;
     height: 18px;
     bottom: 140px;
-    left: 500px;
+    left: clamp(180px, 37vw, 500px);
 }
 @keyframes scaleStar {
     25%{
@@ -433,28 +424,28 @@ body {
 .decorate_flower--one{
     position: absolute;
     top: 250px;
-    left: 50px;
+    left: clamp(20px, 4vw, 50px);
     transform: scale(0);
     animation: scaleCricle 3s var(--t) forwards ease-in-out;
 }
 .decorate_flower--two{
     position: absolute;
     top: 225px;
-    left: 540px;
+    left: clamp(180px, 39vw, 540px);
     transform: scale(0);
     animation: scaleCricle 3s var(--t) forwards ease-in-out;
 }
 .decorate_flower--three{
     position: absolute;
     top: 150px;
-    right: 235px;
+    right: clamp(60px, 17vw, 235px);
     transform: scale(0);
     animation: scaleCricle 3s var(--t) forwards ease-in-out;
 }
 .smiley__icon{
     position: absolute;
-    bottom: 180px;
-    left: 600px;
+    bottom: clamp(80px, 16vh, 160px);
+    left: clamp(300px, 44vw, 620px);
     transform: scale(0);
     animation: scaleCricle 3s 15s forwards ease-in-out;
 }
@@ -691,7 +682,7 @@ body {
     .cricle {
         position: absolute;
         top: 10px;
-        right: -54px;
+        right: 0px;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -777,15 +768,10 @@ body {
         border: 6px solid var(--color-black);
     }
 
-    .name {
-        position: absolute;
-        padding: 0px 3px;
-        bottom: -6px;
-        border: 3px solid var(--color-black);
-    }
-
-    .name span {
-        font-size: 1rem;
+    .content .left,
+    .content .right {
+        width: 100%;
+        padding-left: 0;
     }
 
     .right .balloon_one {
@@ -798,60 +784,31 @@ body {
     .right .balloon_one img{
         width: 76px !important;
     }
-    body {
-  margin: 0;
-  padding: 0;
-  font-family: 'Arial', sans-serif;
-  background: #e8f3fb;
-  text-align: center;
+    .decorate_star.star1 { top: 60px; left: 6%; }
+    .decorate_star.star2 { top: 26px; right: 8%; }
+    .decorate_star.star3 { top: 240px; left: 72%; }
+    .decorate_star.star4 { bottom: 34px; left: 4%; }
+    .decorate_star.star5 { bottom: 130px; left: 58%; }
+    .decorate_flower--one { top: 210px; left: 4%; }
+    .decorate_flower--two { top: 200px; left: 64%; }
+    .decorate_flower--three { top: 120px; right: 6%; }
+    .smiley__icon { bottom: 28px; left: 4%; }
+    .smiley__icon img { width: 64px; }
 }
 
-.container {
-  margin-top: 100px;
+/* ---------- Tablet (659px - 1024px) ---------- */
+@media screen and (min-width: 659px) and (max-width: 1024px) {
+    .content { padding-top: 2.5rem; }
+    .content .left { width: 50%; padding-left: 30px; }
+    .content .right { width: 50%; }
+    .content .right .image { width: 280px; height: 280px; }
+    .title { font-size: 2.2rem; }
+    .title .hat { right: -10px; }
+    .cricle { right: 6px; }
+    .right .balloon_one { left: -40px; }
+    .right .balloon_two { right: -40px; }
+    .smiley__icon { left: 46%; }
 }
 
-h1 {
-  color: #3d8fd4;
-  font-size: 48px;
-  margin-bottom: 40px;
-}
+html, body { overflow-x: hidden; }
 
-.button-group button {
-   position: relative;
-    right: 0px;
-    top: -200px;
-    background-color: var(--color-text-pink);
-    outline: none;
-    padding: 5px 20px;
-    font-size: 10px;
-    border-radius: 50px;
-    border: 3px solid var(--color-black);
-    font-family: "Sriracha", cursive;
-    display: flat;
-    align-items:center;
-    justify-content: center;
-    cursor: pointer;
-    z-index: 22;
-    transform: scale(1);
-    transition: all .5s ease-in-out;
-}
-
-.button-group button:hover {
-  background-color: #3d8fd4;
-  transform: scale(1.05);
-}
-
-@keyframes pulse {
-  0% { box-shadow: 0 0 0 0 rgba(91, 168, 232, 0.7); }
-  70% { box-shadow: 0 0 0 10px rgba(91, 168, 232, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(91, 168, 232, 0); }
-}
-
-    
-
-} 0 0 rgba(91, 168, 232, 0); }
-}
-
-    
-
-}
