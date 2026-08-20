@@ -20,7 +20,7 @@
   var minisize = 16;
   var maxisize = 28;
   var hearts = 66;
-  var over_or_under = "over"; 
+  var over_or_under = "over";
 
   var x = ox = 400;
   var y = oy = 300;
@@ -46,15 +46,43 @@
   addRVLoadEvent(mwah);
 
   function mwah() { if (document.getElementById) {
-    var i, heart;
+    var i;
     for (i = 0; i < hearts; i++) {
-      heart = createDiv("auto", "auto");
+      var heart = createDiv("auto", "auto");
       heart.style.visibility = "hidden";
       heart.style.zIndex = (over_or_under == "over") ? "1001" : "0";
-      heart.style.color = colours[i % colours.length];
       heart.style.pointerEvents = "none";
       heart.style.opacity = 0.75;
-      heart.appendChild(document.createTextNode(String.fromCharCode(9829)));
+
+      var kind = i % 3; /* 0 = heart, 1 = emoji1, 2 = emoji2 */
+      if (kind === 0) {
+        var span = document.createElement("span");
+        span.style.color = colours[i % colours.length];
+        span.textContent = String.fromCharCode(9829);
+        heart.appendChild(span);
+        herzImg[i] = null;
+      } else {
+        var img = document.createElement("img");
+        img.src = EMOJI[kind - 1];
+        img.alt = "";
+        img.style.width = minisize + "px";
+        img.style.height = "auto";
+        img.style.pointerEvents = "none";
+        (function (idx, image, parent) {
+          image.onerror = function () {
+            var t = document.createElement("span");
+            t.style.color = colours[idx % colours.length];
+            t.textContent = String.fromCharCode(9829);
+            t.style.fontSize = minisize + "px";
+            parent.innerHTML = "";
+            parent.appendChild(t);
+            herzImg[idx] = null;
+          };
+        })(i, img, heart);
+        heart.appendChild(img);
+        herzImg[i] = img;
+      }
+
       document.body.appendChild(heart);
       herz[i] = heart;
       herzy[i] = false;
@@ -449,7 +477,10 @@
     gap: 20px;
     margin-bottom: 2.6rem;
   }
-  .bear-card {
+  .bear-card, .teacher-card {
+    -webkit-appearance: none;
+    appearance: none;
+    font-family: inherit;
     display: inline-flex;
     flex-direction: column;
     align-items: center;
@@ -462,7 +493,7 @@
     box-shadow: 0 10px 0 rgba(44,61,85,.10);
     animation: bear-float 3.2s ease-in-out infinite;
   }
-  .bear-gif { width: clamp(120px, 34vw, 200px); height: auto; }
+  .bear-gif, .teacher-img { width: clamp(120px, 34vw, 200px); height: auto; }
   .bear-name { font-family: "Cairo", sans-serif; font-weight: 800; font-size: 1.3rem; color: #2c3d55; }
   .bear-hint { font-family: "Cairo", sans-serif; font-size: .85rem; color: #3d8fd4; }
   @keyframes bear-float {
@@ -521,6 +552,7 @@
     object-fit: contain;
     display: block;
   }
+  .turtle-thumb.nudge-right img { transform: translateX(12px); }
   .turtle-name {
     font-family: "Cairo", sans-serif;
     font-weight: 700;
